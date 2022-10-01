@@ -13,11 +13,6 @@
   "lint-staged": {
     "*.{js,css,md,ts,tsx}": "prettier --write"
   },
-  "husky": {
-    "hook": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "dependencies": {
     "@commitlint/cli": "^17.1.2",
     "react": "^18.2.0",
