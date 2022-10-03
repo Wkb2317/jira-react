@@ -9,7 +9,8 @@
     "lint": "lint-staged",
     "prettier": "prettier --write .",
     "prepare": "husky install",
-    "commit": "git add .  && git cz"
+    "commit": "git add .  && git cz",
+    "json-server": "json-server __json_server_mock__/db.json --watch"
   },
   "lint-staged": {
     "*.{js,css,md,ts,tsx}": "prettier --write"
@@ -21,6 +22,7 @@
   },
   "dependencies": {
     "@commitlint/cli": "^17.1.2",
+    "qs": "^6.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^3.0.2"
@@ -34,6 +36,7 @@
     "conventional-changelog-cli": "^2.2.2",
     "cz-conventional-changelog-zh": "^0.0.2",
     "husky": "^8.0.1",
+    "json-server": "^0.17.0",
     "lint-staged": "^13.0.3",
     "prettier": "2.7.1",
     "typescript": "^4.6.4",
