@@ -1,5 +1,5 @@
 // 判断是不是为0
-const isZero = (val: number | object | string) => (val === 0 ? true : !!val)
+const isZero = (val: unknown) => (val === 0 ? true : !!val)
 
 // 删除参数中的空白参数
 export const cleanObject = (obj: object) => {
