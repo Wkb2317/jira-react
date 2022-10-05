@@ -1,6 +1,7 @@
 import React from 'react'
+import type { IList } from './type'
 
-export const List = ({ list, users }) => {
+export const List = ({ list, users }: IList) => {
   return (
     <table>
       <thead>

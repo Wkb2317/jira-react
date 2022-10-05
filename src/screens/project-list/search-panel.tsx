@@ -1,6 +1,7 @@
 import React from 'react'
+import type { ISearchPanel } from './type'
 
-export const SearchPanel = ({ param, setParam, users }) => {
+export const SearchPanel = ({ param, setParam, users }: ISearchPanel) => {
   return (
     <form>
       <input
@@ -18,7 +19,7 @@ export const SearchPanel = ({ param, setParam, users }) => {
         onChange={(e) =>
           setParam({
             ...param,
-            personId: e.target.value === '' ? '' : parseInt(e.target.value)
+            personId: e.target.value
           })
         }
       >
