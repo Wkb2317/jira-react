@@ -10,7 +10,7 @@
     "prettier": "prettier --write .",
     "prepare": "husky install",
     "commit": "git add .  && git cz",
-    "json-server": "json-server __json_server_mock__/db.json --watch"
+    "json-server": "json-server __json_server_mock__/db.json --watch --middlewares __json_server_mock__/middleware.js"
   },
   "lint-staged": {
     "*.{js,css,md,ts,tsx}": "prettier --write"
