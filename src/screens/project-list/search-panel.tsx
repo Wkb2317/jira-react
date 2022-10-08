@@ -1,10 +1,11 @@
 import React from 'react'
+import { Form, Input, Select } from 'antd'
 import type { ISearchPanel } from './type'
 
 export const SearchPanel = ({ param, setParam, users }: ISearchPanel) => {
   return (
-    <form>
-      <input
+    <Form style={{ display: 'flex' }}>
+      <Input
         type="text"
         value={param?.name}
         onChange={(e) =>
@@ -14,22 +15,22 @@ export const SearchPanel = ({ param, setParam, users }: ISearchPanel) => {
           })
         }
       />
-      <select
+      <Select
         value={param?.personId}
-        onChange={(e) =>
+        onChange={(value) =>
           setParam({
             ...param,
-            personId: e.target.value
+            personId: value
           })
         }
       >
-        <option value="">负责人</option>
+        <Select.Option value="">负责人</Select.Option>
         {users.map((item) => (
-          <option value={item.id} key={item.id}>
+          <Select.Option value={item.id} key={item.id}>
             {item.name}
-          </option>
+          </Select.Option>
         ))}
-      </select>
-    </form>
+      </Select>
+    </Form>
   )
 }

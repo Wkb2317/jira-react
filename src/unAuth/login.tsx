@@ -1,28 +1,37 @@
 import React, { FormEvent } from 'react'
-import { loginApi } from '../auth-provider'
+import { Form, Input, Button } from 'antd'
 import { useAuth } from '../context/auth-context'
 
 export function Login() {
   const { user, login } = useAuth()
 
-  const submit = (event: FormEvent<HTMLFormElement>) => {
-    // 阻止表单的默认事件
-    event.preventDefault()
-    const username = (event.currentTarget.elements[0] as HTMLInputElement).value
-    const password = (event.currentTarget.elements[1] as HTMLInputElement).value
-    login({ username, password })
+  const submit = (values: { username: string; password: string }) => {
+    login(values)
   }
 
   return (
     <div>
-      <div>{user === null ? '' : `登录成功，当前用户是${user.name}`}</div>
-      <form onSubmit={(event) => submit(event)}>
-        <label htmlFor="username">账户</label>
-        <input type="text" name="username" />
-        <label htmlFor="password">密码</label>
-        <input type="password" name="password" />
-        <button>登录</button>
-      </form>
+      <Form onFinish={submit}>
+        <Form.Item
+          label="姓名"
+          name="username"
+          rules={[{ required: true, message: '请输入姓名!' }]}
+        >
+          <Input></Input>
+        </Form.Item>
+        <Form.Item
+          label="密码"
+          name="password"
+          rules={[{ required: true, message: '请输入密码!' }]}
+        >
+          <Input type="password"></Input>
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            登录
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   )
 }

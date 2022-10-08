@@ -3,6 +3,7 @@ import qs from 'qs'
 import { BASE_URL } from '../config/config'
 import * as auth from '../auth-provider'
 import { useAuth } from '../context/auth-context'
+import { type } from 'os'
 
 interface Config extends RequestInit {
   token?: string
@@ -47,3 +48,18 @@ export function useHttp() {
   return (...[endPoint, config]: Parameters<typeof http>) =>
     http(endPoint, { ...config, token: user?.token })
 }
+
+type Person = {
+  name: string
+  age: number
+}
+// keyof 拿到Person的key
+type PersonKeys = keyof Person
+// Exclude 排除某个类型
+type age = Exclude<PersonKeys, 'name'>
+// Pick 挑选某个类型
+type name = Pick<Person, 'name'>
+// Omit 删除某个类型
+type age2 = Omit<Person, 'name'>
+// Partial 将类型都变成可选类型
+const xiaoHong: Partial<Person> = {}
