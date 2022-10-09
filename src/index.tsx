@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { loadDevTools } from 'jira-dev-tool'
 
-import './index.css'
 import App from './App'
 import { AppProvider } from './context/index'
 

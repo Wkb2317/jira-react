@@ -3,7 +3,7 @@ import qs from 'qs'
 import { BASE_URL } from '../config/config'
 import * as auth from '../auth-provider'
 import { useAuth } from '../context/auth-context'
-import { type } from 'os'
+import { message } from 'antd'
 
 interface Config extends RequestInit {
   token?: string
@@ -29,18 +29,29 @@ export const http = (
     config.body = JSON.stringify(data || {})
   }
 
-  return fetch(`${BASE_URL}/${endPoint}`, config).then(async (res) => {
-    if (res.status === 401) {
-      await auth.logout()
-      return Promise.reject({ message: '请重新登录' })
+  return fetch(`${BASE_URL}/${endPoint}`, config).then(
+    async (res) => {
+      if (res.status === 401) {
+        await auth.logout()
+        return Promise.reject({ message: '请重新登录' })
+      }
+      if (res.status === 400) {
+        console.log('status 400')
+        const data = await res.json()
+        message.error(data.message)
+        return Promise.reject({ message: data.message })
+      }
+      const data = await res.json()
+      if (res.ok) {
+        return data
+      } else {
+        return Promise.reject(data)
+      }
+    },
+    (err: Error) => {
+      console.log('http function err:', err)
     }
-    const data = await res.json()
-    if (res.ok) {
-      return data
-    } else {
-      return Promise.reject(data)
-    }
-  })
+  )
 }
 
 export function useHttp() {

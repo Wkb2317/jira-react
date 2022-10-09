@@ -13,21 +13,19 @@ export function Login() {
     <div>
       <Form onFinish={submit}>
         <Form.Item
-          label="姓名"
           name="username"
           rules={[{ required: true, message: '请输入姓名!' }]}
         >
           <Input></Input>
         </Form.Item>
         <Form.Item
-          label="密码"
           name="password"
           rules={[{ required: true, message: '请输入密码!' }]}
         >
           <Input type="password"></Input>
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button style={{ width: '100%' }} type="primary" htmlType="submit">
             登录
           </Button>
         </Form.Item>

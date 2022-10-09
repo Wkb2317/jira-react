@@ -1,5 +1,6 @@
 import { User } from './screens/project-list/type'
 import { BASE_URL } from './config/config'
+import { http } from './utils/http'
 const localStorageKey = '__auth_priverder_token__'
 
 interface Form {
@@ -19,35 +20,21 @@ export const handleUserResponse = ({ user }: { user: User }): User => {
 type LoginRes = User | null
 // 登录接口
 export const loginApi = (form: Form): Promise<User> => {
-  return fetch(`${BASE_URL}/login `, {
+  return http(`login `, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json '
-    },
-    body: JSON.stringify(form)
+    data: form
   }).then(async (res) => {
-    if (res.ok) {
-      return handleUserResponse(await res.json())
-    } else {
-      return Promise.reject(form)
-    }
+    return handleUserResponse(res)
   })
 }
 
 // 注册
 export const registerApi = (form: Form): Promise<User> => {
-  return fetch(`${BASE_URL}/register `, {
+  return http(`register `, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json '
-    },
-    body: JSON.stringify(form)
+    data: form
   }).then(async (res) => {
-    if (res.ok) {
-      return handleUserResponse(await res.json())
-    } else {
-      return Promise.reject(res)
-    }
+    return handleUserResponse(res)
   })
 }
 
