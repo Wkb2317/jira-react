@@ -7,7 +7,6 @@ import { List } from './list'
 import { cleanObject } from '../../utils/index'
 import { useMount } from '../../hooks/useMount'
 import { useDebounce } from '../../hooks/useDebounce'
-import { BASE_URL } from '../../config/config'
 import { useHttp } from '../../utils/http'
 
 export const ProjectList = memo(() => {
