@@ -1084,7 +1084,7 @@
     "core-js-pure" "^3.25.1"
     "regenerator-runtime" "^0.13.4"
 
-"@babel/runtime@^7.10.1", "@babel/runtime@^7.10.2", "@babel/runtime@^7.10.4", "@babel/runtime@^7.10.5", "@babel/runtime@^7.11.1", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.16.3", "@babel/runtime@^7.18.0", "@babel/runtime@^7.18.3", "@babel/runtime@^7.18.9", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.10.1", "@babel/runtime@^7.10.2", "@babel/runtime@^7.10.4", "@babel/runtime@^7.11.1", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.16.3", "@babel/runtime@^7.18.0", "@babel/runtime@^7.18.3", "@babel/runtime@^7.18.9", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
   "integrity" "sha512-eR8Lo9hnDS7tqkO7NsV+mKvCmv5boaXFSZ70DnfhcgiEne8hv9oCEd36Klw74EtizEqLsy4YnW8UWwpBVolHZA=="
   "resolved" "https://registry.npmmirror.com/@babel/runtime/-/runtime-7.19.0.tgz"
   "version" "7.19.0"
@@ -3364,6 +3364,11 @@
     "hoopy" "^0.1.4"
     "tryer" "^1.0.1"
 
+"big-integer@^1.6.16":
+  "integrity" "sha512-GPEid2Y9QU1Exl1rpO9B2IPJGHPSupF5GnVIP0blYvNOMer2bTvSWs1jGOUg04hTmu67nmLsQ9TBo1puaotBHg=="
+  "resolved" "https://registry.npmmirror.com/big-integer/-/big-integer-1.6.51.tgz"
+  "version" "1.6.51"
+
 "big.js@^5.2.2":
   "integrity" "sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ=="
   "resolved" "https://registry.npmmirror.com/big.js/-/big.js-5.2.2.tgz"
@@ -3456,6 +3461,20 @@
   "version" "3.0.2"
   dependencies:
     "fill-range" "^7.0.1"
+
+"broadcast-channel@^3.4.1":
+  "integrity" "sha512-cIAKJXAxGJceNZGTZSBzMxzyOn72cVgPnKx4dc6LRjQgbaJUQqhy5rzL3zbMxkMWsGKkv2hSFkPRMEXfoMZ2Mg=="
+  "resolved" "https://registry.npmmirror.com/broadcast-channel/-/broadcast-channel-3.7.0.tgz"
+  "version" "3.7.0"
+  dependencies:
+    "@babel/runtime" "^7.7.2"
+    "detect-node" "^2.1.0"
+    "js-sha3" "0.8.0"
+    "microseconds" "0.2.0"
+    "nano-time" "1.0.0"
+    "oblivious-set" "1.0.0"
+    "rimraf" "3.0.2"
+    "unload" "2.2.0"
 
 "browser-process-hrtime@^1.0.0":
   "integrity" "sha512-9o5UecI3GhkpM6DrXr69PblIuWxPKk9Y0jHBRhdocZ2y7YECBFCsHm79Pr3OyR2AvjhDkabFJaDJMYRazHgsow=="
@@ -4542,7 +4561,7 @@
   "resolved" "https://registry.npmmirror.com/dateformat/-/dateformat-3.0.3.tgz"
   "version" "3.0.3"
 
-"dayjs@1.x":
+"dayjs@^1.11.5", "dayjs@1.x":
   "integrity" "sha512-CAdX5Q3YW3Gclyo5Vpqkgpj8fSdLQcRuzfX6mC6Phy0nfJ0eGYOeS7m4mt2plDWLAtA4TqTakvbboHvUxfe4iA=="
   "resolved" "https://registry.npmmirror.com/dayjs/-/dayjs-1.11.5.tgz"
   "version" "1.11.5"
@@ -4713,7 +4732,7 @@
   "resolved" "https://registry.npmmirror.com/detect-newline/-/detect-newline-3.1.0.tgz"
   "version" "3.1.0"
 
-"detect-node@^2.0.4":
+"detect-node@^2.0.4", "detect-node@^2.1.0":
   "integrity" "sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g=="
   "resolved" "https://registry.npmmirror.com/detect-node/-/detect-node-2.1.0.tgz"
   "version" "2.1.0"
@@ -7302,15 +7321,15 @@
     "import-local" "^3.0.2"
     "jest-cli" "^27.5.1"
 
-"jira-dev-tool@^1.7.61":
-  "integrity" "sha512-ym9L6tQAs7Pi9XrGvoOlz0/dpYR23I2J1C0IDIk3E29YySHwYJ5KWWHZIk9dqiFSkDhfr/ae8CbZBhAbfe8EmQ=="
-  "resolved" "https://registry.npmmirror.com/jira-dev-tool/-/jira-dev-tool-1.7.61.tgz"
-  "version" "1.7.61"
+"jira-dev-tool@^1.6.13", "jira-dev-tool@^1.6.59":
+  "integrity" "sha512-0LsUIP2qMSRzbnlccWeaWOxuh7zN+SHYarcT/YFQE+1mw9k6jbDNCxlxCjrpKfo/BYF8LWL6pmTSvHfDAS0kGg=="
+  "resolved" "https://registry.npmmirror.com/jira-dev-tool/-/jira-dev-tool-1.6.59.tgz"
+  "version" "1.6.59"
   dependencies:
     "antd" "^4.9.1"
+    "jira-dev-tool" "^1.6.13"
     "msw" "^0.24.1"
-    "react-query" "^2.26.3"
-    "react-query-devtools" "^2.6.3"
+    "react-query" "^3.5.10"
 
 "jju@^1.1.0":
   "integrity" "sha512-8wb9Yw966OSxApiCt0K3yNJL8pnNeIv+OEq2YMidz4FKP6nonSRoOXc80iXY4JaN2FC11B9qsNmDsm+ZOfMROA=="
@@ -7321,6 +7340,11 @@
   "integrity" "sha512-08bOAKweV2NUC1wqTtf3qZlnpOX/R2DU9ikpjOHs0H+ibQv3zpncVQg6um4uYtRtrwIX8M4Nh3ytK4HGlYAq7Q=="
   "resolved" "https://registry.npmmirror.com/js-sdsl/-/js-sdsl-4.1.5.tgz"
   "version" "4.1.5"
+
+"js-sha3@0.8.0":
+  "integrity" "sha512-gF1cRrHhIzNfToc802P800N8PpXS+evLLXfsVpowqmAFR9uwbi89WvXg2QspOmXL8QL86J4T1EpFu+yUkwJY3Q=="
+  "resolved" "https://registry.npmmirror.com/js-sha3/-/js-sha3-0.8.0.tgz"
+  "version" "0.8.0"
 
 "js-tokens@^3.0.0 || ^4.0.0", "js-tokens@^4.0.0":
   "integrity" "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="
@@ -7878,12 +7902,12 @@
   "resolved" "https://registry.npmmirror.com/map-obj/-/map-obj-4.3.0.tgz"
   "version" "4.3.0"
 
-"match-sorter@^4.1.0":
-  "integrity" "sha512-s+3h9TiZU9U1pWhIERHf8/f4LmBN6IXaRgo2CI17+XGByGS1GvG5VvXK9pcGyCjGe3WM3mSYRC3ipGrd5UEVgw=="
-  "resolved" "https://registry.npmmirror.com/match-sorter/-/match-sorter-4.2.1.tgz"
-  "version" "4.2.1"
+"match-sorter@^6.0.2":
+  "integrity" "sha512-mxybbo3pPNuA+ZuCUhm5bwNkXrJTbsk5VWbR5wiwz/GC6LIiegBGn2w3O08UG/jdbYLinw51fSQ5xNU1U3MgBw=="
+  "resolved" "https://registry.npmmirror.com/match-sorter/-/match-sorter-6.3.1.tgz"
+  "version" "6.3.1"
   dependencies:
-    "@babel/runtime" "^7.10.5"
+    "@babel/runtime" "^7.12.5"
     "remove-accents" "0.4.2"
 
 "mdn-data@2.0.14":
@@ -7972,6 +7996,11 @@
   dependencies:
     "braces" "^3.0.2"
     "picomatch" "^2.3.1"
+
+"microseconds@0.2.0":
+  "integrity" "sha512-n7DHHMjR1avBbSpsTBj6fmMGh2AGrifVV4e+WYc3Q9lO+xnSZ3NyhcBND3vzzatt05LFhoKFRxrIyklmLlUtyA=="
+  "resolved" "https://registry.npmmirror.com/microseconds/-/microseconds-0.2.0.tgz"
+  "version" "0.2.0"
 
 "mime-db@>= 1.43.0 < 2", "mime-db@1.52.0":
   "integrity" "sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg=="
@@ -8130,6 +8159,13 @@
   "integrity" "sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA=="
   "resolved" "https://registry.npmmirror.com/mute-stream/-/mute-stream-0.0.8.tgz"
   "version" "0.0.8"
+
+"nano-time@1.0.0":
+  "integrity" "sha512-flnngywOoQ0lLQOTRNexn2gGSNuM9bKj9RZAWSzhQ+UJYaAFG9bac4DW9VHjUAzrOaIcajHybCTHe/bkvozQqA=="
+  "resolved" "https://registry.npmmirror.com/nano-time/-/nano-time-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "big-integer" "^1.6.16"
 
 "nanoid@^3.1.23", "nanoid@^3.3.4":
   "integrity" "sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw=="
@@ -8361,6 +8397,11 @@
     "call-bind" "^1.0.2"
     "define-properties" "^1.1.3"
     "es-abstract" "^1.19.1"
+
+"oblivious-set@1.0.0":
+  "integrity" "sha512-z+pI07qxo4c2CulUHCDf9lcqDlMSo72N/4rLUpRXf6fu+q8vjt8y0xS+Tlf8NTJDdTXHbdeO1n3MlbctwEoXZw=="
+  "resolved" "https://registry.npmmirror.com/oblivious-set/-/oblivious-set-1.0.0.tgz"
+  "version" "1.0.0"
 
 "obuf@^1.0.0", "obuf@^1.1.2":
   "integrity" "sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg=="
@@ -9940,19 +9981,14 @@
   "resolved" "https://registry.npmmirror.com/react-is/-/react-is-18.2.0.tgz"
   "version" "18.2.0"
 
-"react-query-devtools@^2.6.3":
-  "integrity" "sha512-pSvWq5Q8zgIP7QbF0+4BerCHLaLn5HPzce7sIXYqz4XEizcYJHkJtcrAwn6bUkCu5JmAt1Y7fViQtZwOIG2SYA=="
-  "resolved" "https://registry.npmmirror.com/react-query-devtools/-/react-query-devtools-2.6.3.tgz"
-  "version" "2.6.3"
-  dependencies:
-    "match-sorter" "^4.1.0"
-
-"react-query@^2.26.3":
-  "integrity" "sha512-sXGG0gh1ah11AcfptYOCRpGDoYMnssq6riQUpQaLSM2EOodVkexp3zNLk1MFDgfRGuXQst40Tnu17oNwni66aA=="
-  "resolved" "https://registry.npmmirror.com/react-query/-/react-query-2.26.4.tgz"
-  "version" "2.26.4"
+"react-query@^3.5.10":
+  "integrity" "sha512-F6hYDKyNgDQfQOuR1Rsp3VRzJnWHx6aRnnIZHMNGGgbL3SBgpZTDg8MQwmxOgpCAoqZJA+JSNCydF1xGJqKOCA=="
+  "resolved" "https://registry.npmmirror.com/react-query/-/react-query-3.39.2.tgz"
+  "version" "3.39.2"
   dependencies:
     "@babel/runtime" "^7.5.5"
+    "broadcast-channel" "^3.4.1"
+    "match-sorter" "^6.0.2"
 
 "react-refresh@^0.11.0":
   "integrity" "sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A=="
@@ -10344,7 +10380,7 @@
   "resolved" "https://registry.npmmirror.com/rfdc/-/rfdc-1.3.0.tgz"
   "version" "1.3.0"
 
-"rimraf@^3.0.0", "rimraf@^3.0.2":
+"rimraf@^3.0.0", "rimraf@^3.0.2", "rimraf@3.0.2":
   "integrity" "sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA=="
   "resolved" "https://registry.npmmirror.com/rimraf/-/rimraf-3.0.2.tgz"
   "version" "3.0.2"
@@ -11547,6 +11583,14 @@
   "integrity" "sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ=="
   "resolved" "https://registry.npmmirror.com/universalify/-/universalify-2.0.0.tgz"
   "version" "2.0.0"
+
+"unload@2.2.0":
+  "integrity" "sha512-B60uB5TNBLtN6/LsgAf3udH9saB5p7gqJwcFfbOEZ8BcBHnGwCf6G/TGiEqkRAxX7zAFIUtzdrXQSdL3Q/wqNA=="
+  "resolved" "https://registry.npmmirror.com/unload/-/unload-2.2.0.tgz"
+  "version" "2.2.0"
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "detect-node" "^2.0.4"
 
 "unpipe@~1.0.0", "unpipe@1.0.0":
   "integrity" "sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ=="

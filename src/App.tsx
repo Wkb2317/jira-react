@@ -4,6 +4,7 @@ import { UnAuthApp } from './unAuth/index'
 import { AuthApp } from './authApp'
 import { useAuth } from './context/auth-context'
 import './App.css'
+import { memo } from 'react'
 
 function App() {
   const { user } = useAuth()
@@ -17,4 +18,4 @@ function App() {
   )
 }
 
-export default App
+export default memo(App)

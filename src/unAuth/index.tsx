@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import { Card, Button, Divider } from 'antd'
 import styled from '@emotion/styled'
 
@@ -9,7 +9,7 @@ import logo from '../assets/logo.svg'
 import left from '../assets/left.svg'
 import right from '../assets/right.svg'
 
-export function UnAuthApp() {
+export const UnAuthApp = memo(() => {
   const [isRegister, setIsRegister] = useState(false)
 
   return (
@@ -22,14 +22,16 @@ export function UnAuthApp() {
 
         <Divider></Divider>
         {!isRegister ? (
-          <a onClick={() => setIsRegister(!isRegister)}>没有账号？注册新账号</a>
+          <Button type="link" onClick={() => setIsRegister(!isRegister)}>
+            没有账号？注册新账号
+          </Button>
         ) : (
           ''
         )}
       </ShadowCard>
     </Wrapper>
   )
-}
+})
 
 const Wrapper = styled.div`
   position: relative;

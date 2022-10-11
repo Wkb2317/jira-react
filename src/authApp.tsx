@@ -5,6 +5,7 @@ import { useAuth } from './context/auth-context'
 import { ProjectList } from './screens/project-list'
 import styled from '@emotion/styled'
 import { Row } from './components/lib'
+import { ReactComponent as SoftwareLogo } from './assets/software-logo.svg'
 
 export function AuthApp() {
   const { logout } = useAuth()
@@ -24,19 +25,19 @@ export function AuthApp() {
   return (
     <Container>
       <Header between={true}>
-        <HeaderLeft between={true} gap={true}>
-          <h3>logo</h3>
-          <h3>项目</h3>
-          <h3>成员</h3>
+        <HeaderLeft>
+          <SoftwareLogo className="logo"></SoftwareLogo>
+          <div>项目</div>
+          <div>成员</div>
         </HeaderLeft>
         <HeaderRight>
           <Dropdown overlay={menu}>
-            <a onClick={(e) => e.preventDefault()}>
+            <Button type="link" onClick={(e) => e.preventDefault()}>
               <Space>
-                设置
+                Hi,david
                 <DownOutlined />
               </Space>
-            </a>
+            </Button>
           </Dropdown>
         </HeaderRight>
       </Header>
@@ -56,12 +57,19 @@ const Container = styled.div`
 const Header = styled(Row)`
   width: 100vw;
   height: 6.25rem;
-  padding: 0px 1.25rem;
+  padding: 0px 2rem;
 `
 
-const HeaderLeft = styled(Row)`
-  width: 18.5rem;
+const HeaderLeft = styled.div`
+  width: 36rem;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .logo {
+    width: 25rem;
+  }
 `
 
 const HeaderRight = styled.div``

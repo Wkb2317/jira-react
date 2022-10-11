@@ -1,8 +1,8 @@
-import React, { FormEvent } from 'react'
+import React, { FormEvent, memo } from 'react'
 import { Form, Input, Button } from 'antd'
 import { useAuth } from '../context/auth-context'
 
-export function Login() {
+export const Login = memo(() => {
   const { user, login } = useAuth()
 
   const submit = (values: { username: string; password: string }) => {
@@ -32,4 +32,4 @@ export function Login() {
       </Form>
     </div>
   )
-}
+})

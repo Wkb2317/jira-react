@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useState, memo, useCallback } from 'react'
 import * as auth from '../auth-provider'
 import { useMount } from '../hooks/useMount'
 import { User } from '../screens/project-list/type'
@@ -7,17 +7,6 @@ import { http } from '../utils/http'
 interface AuthForm {
   username: string
   password: string
-}
-
-// 初始化user
-const bootstrapUser = async () => {
-  let user = null
-  const token = auth.getToken()
-  if (token) {
-    const data = await http('me', { token })
-    user = data.user
-  }
-  return user
 }
 
 const AuthContext = React.createContext<
@@ -32,11 +21,26 @@ const AuthContext = React.createContext<
 AuthContext.displayName = 'AuthContext'
 
 // provider组件
-export function AuthProvider({ children }: { children: ReactNode }) {
+export default memo(function AuthProvider({
+  children
+}: {
+  children: ReactNode
+}) {
   const [user, setUser] = useState<User | null>(null)
 
+  // 初始化user
+  const bootstrapUser = useCallback(async () => {
+    let user = null
+    const token = auth.getToken()
+    if (token) {
+      const data = await http('me', { token })
+      user = data.user
+    }
+    return user
+  }, [])
+
   useMount(() => {
-    bootstrapUser().then(setUser)
+    bootstrapUser().then((user) => setUser(user))
   })
 
   const login = (form: AuthForm) =>
@@ -53,7 +57,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       children={children}
     ></AuthContext.Provider>
   )
-}
+})
 
 // 自定义hook
 export const useAuth = () => {

@@ -36,7 +36,6 @@ export const http = (
         return Promise.reject({ message: '请重新登录' })
       }
       if (res.status === 400) {
-        console.log('status 400')
         const data = await res.json()
         message.error(data.message)
         return Promise.reject({ message: data.message })

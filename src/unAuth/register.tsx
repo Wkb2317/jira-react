@@ -1,8 +1,8 @@
-import React, { FormEvent } from 'react'
+import React, { FormEvent, memo } from 'react'
 import { Form, Input, Button } from 'antd'
 import { useAuth } from '../context/auth-context'
 
-export function Register() {
+export const Register = memo(() => {
   const { user, register } = useAuth()
 
   const submit = (values: { username: string; password: string }) => {
@@ -34,4 +34,4 @@ export function Register() {
       </Form>
     </div>
   )
-}
+})

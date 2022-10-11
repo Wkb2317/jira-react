@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Table } from 'antd'
+import dayjs from 'dayjs'
 import type { IList } from './type'
 
-export const List = ({ list, users }: IList) => {
+export const List = memo(({ list, users }: IList) => {
   return (
     <Table
       pagination={false}
       dataSource={list}
+      rowKey={'id'}
       columns={[
         {
           title: '项目',
@@ -21,8 +23,19 @@ export const List = ({ list, users }: IList) => {
               </span>
             )
           }
+        },
+        {
+          title: '部门',
+          dataIndex: 'organization'
+        },
+        {
+          title: '部门',
+          dataIndex: 'created',
+          render(value, row) {
+            return <span>{dayjs(value).format('YYYY-MM-DD')}</span>
+          }
         }
       ]}
     ></Table>
   )
-}
+})
