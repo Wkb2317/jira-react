@@ -3,11 +3,10 @@ import { Table } from 'antd'
 import dayjs from 'dayjs'
 import type { IList } from './type'
 
-export const List = memo(({ list, users }: IList) => {
+export const List = memo(({ users, ...props }: IList) => {
   return (
     <Table
       pagination={false}
-      dataSource={list}
       rowKey={'id'}
       columns={[
         {
@@ -36,6 +35,7 @@ export const List = memo(({ list, users }: IList) => {
           }
         }
       ]}
+      {...props}
     ></Table>
   )
 })

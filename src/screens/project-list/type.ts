@@ -1,3 +1,5 @@
+import { TableProps } from 'antd'
+
 export interface User {
   name: string
   id: string
@@ -19,7 +21,6 @@ export interface Project {
   personId: string
 }
 
-export interface IList {
-  list: Project[]
+export interface IList extends TableProps<Project> {
   users: User[]
 }
