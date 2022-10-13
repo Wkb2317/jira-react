@@ -27,6 +27,13 @@ export function useAsync<D>(initialState?: State<D>) {
     })
   }
 
+  const setData = (data: D) => {
+    setState({
+      ...state,
+      data
+    })
+  }
+
   const setError = (res: Error) => {
     setState({
       data: null,
@@ -62,6 +69,7 @@ export function useAsync<D>(initialState?: State<D>) {
     setError,
     setSuccess,
     setState,
+    setData,
     run,
     ...state
   }

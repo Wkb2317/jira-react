@@ -1,5 +1,15 @@
-import React, { ReactNode, useState, memo, useCallback } from 'react'
+import { Typography } from 'antd'
+import { DevTools } from 'jira-dev-tool'
+import React, {
+  ReactNode,
+  useState,
+  memo,
+  useCallback,
+  ReactPropTypes
+} from 'react'
 import * as auth from '../auth-provider'
+import { FullPageLoading, FullPageWrapper } from '../components/lib'
+import { useAsync } from '../hooks/useAsync'
 import { useMount } from '../hooks/useMount'
 import { User } from '../screens/project-list/type'
 import { http } from '../utils/http'
@@ -26,10 +36,19 @@ export default memo(function AuthProvider({
 }: {
   children: ReactNode
 }) {
-  const [user, setUser] = useState<User | null>(null)
+  // const [user, setUser] = useState<User | null>(null)
+  const {
+    isLoading,
+    isPending,
+    isError,
+    run,
+    data: user,
+    error,
+    setData: setUser
+  } = useAsync<User | null>()
 
   // 初始化user
-  const bootstrapUser = useCallback(async () => {
+  const bootstrapUser = async () => {
     let user = null
     const token = auth.getToken()
     if (token) {
@@ -37,10 +56,11 @@ export default memo(function AuthProvider({
       user = data.user
     }
     return user
-  }, [])
+  }
 
   useMount(() => {
-    bootstrapUser().then((user) => setUser(user))
+    run(bootstrapUser())
+    // bootstrapUser().then((user) => setUser(user))
   })
 
   const login = (form: AuthForm) =>
@@ -50,6 +70,16 @@ export default memo(function AuthProvider({
     auth.registerApi(form).then((res) => setUser(res))
 
   const logout = () => auth.logout().then(() => setUser(null))
+
+  // 如果是在等待中，则全屏显示等待
+  if (isPending || isLoading) {
+    return <FullPageLoading></FullPageLoading>
+  }
+
+  // 如果报错了，显示报错页面
+  if (isError) {
+    return <FullPageError error={error}></FullPageError>
+  }
 
   return (
     <AuthContext.Provider
@@ -66,4 +96,13 @@ export const useAuth = () => {
     throw new Error('useAuth必须在AuthProvider中使用')
   }
   return authContext
+}
+
+export const FullPageError = (props: { error: Error | null }) => {
+  return (
+    <FullPageWrapper>
+      <DevTools></DevTools>
+      <Typography.Text type="danger">{props.error?.message}</Typography.Text>
+    </FullPageWrapper>
+  )
 }

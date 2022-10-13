@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { Spin, Typography } from 'antd'
 
 export const Row = styled.div<{
   gap?: number | boolean
@@ -22,3 +23,19 @@ export const Row = styled.div<{
         : '0'};
   }
 `
+
+export const FullPageWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const FullPageLoading = () => {
+  return (
+    <FullPageWrapper>
+      <Spin size="large" />
+    </FullPageWrapper>
+  )
+}
