@@ -1,12 +1,14 @@
 import React, { FormEvent, memo } from 'react'
 import { Form, Input, Button } from 'antd'
 import { useAuth } from '../context/auth-context'
+import { useAsync } from '../hooks/useAsync'
 
 export const Login = memo(() => {
   const { user, login } = useAuth()
+  const { isLoading, run } = useAsync()
 
   const submit = (values: { username: string; password: string }) => {
-    login(values)
+    run(login(values))
   }
 
   return (
@@ -25,7 +27,12 @@ export const Login = memo(() => {
           <Input type="password"></Input>
         </Form.Item>
         <Form.Item>
-          <Button style={{ width: '100%' }} type="primary" htmlType="submit">
+          <Button
+            loading={isLoading}
+            style={{ width: '100%' }}
+            type="primary"
+            htmlType="submit"
+          >
             登录
           </Button>
         </Form.Item>
