@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import { Link } from 'react-router-dom'
 import { Table } from 'antd'
 import dayjs from 'dayjs'
 import type { IList } from './type'
@@ -11,7 +12,9 @@ export const List = memo(({ users, ...props }: IList) => {
       columns={[
         {
           title: '项目',
-          dataIndex: 'name'
+          render(value, row) {
+            return <Link to={`/project/${value.id}`}>{value.name}</Link>
+          }
         },
         {
           title: '负责人',

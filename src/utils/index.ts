@@ -26,3 +26,6 @@ export const cleanObject = (obj: object) => {
 
   return objCopy
 }
+
+// 重置路由
+export const resetRoute = () => (window.location.href = window.location.origin)
