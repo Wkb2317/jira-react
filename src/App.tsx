@@ -2,9 +2,10 @@ import { ProjectList } from './screens/project-list/index.jsx'
 import { TsTest } from './screens/ts-test/index'
 import { UnAuthApp } from './unAuth/index'
 import { AuthApp } from './authApp'
-import { useAuth } from './context/auth-context'
+import { FullPageError, useAuth } from './context/auth-context'
 import './App.css'
 import { memo } from 'react'
+import { ErrorBoundary } from './components/error-boundary'
 
 function App() {
   const { user } = useAuth()
@@ -13,7 +14,9 @@ function App() {
     <div className="App">
       {/* <ProjectList></ProjectList> */}
       {/* <TsTest></TsTest> */}
-      {user ? <AuthApp></AuthApp> : <UnAuthApp></UnAuthApp>}
+      <ErrorBoundary fallbackRender={FullPageError}>
+        {user ? <AuthApp></AuthApp> : <UnAuthApp></UnAuthApp>}
+      </ErrorBoundary>
     </div>
   )
 }

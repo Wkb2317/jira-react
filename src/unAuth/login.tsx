@@ -1,11 +1,14 @@
-import React, { FormEvent, memo } from 'react'
+import React, { FormEvent, memo, useState } from 'react'
 import { Form, Input, Button } from 'antd'
 import { useAuth } from '../context/auth-context'
 import { useAsync } from '../hooks/useAsync'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 export const Login = memo(() => {
   const { user, login } = useAuth()
   const { isLoading, run } = useAsync()
+
+  useDocumentTitle('登录或注册', false)
 
   const submit = (values: { username: string; password: string }) => {
     run(login(values))

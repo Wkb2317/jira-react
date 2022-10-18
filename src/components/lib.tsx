@@ -32,6 +32,7 @@ export const FullPageWrapper = styled.div`
   align-items: center;
 `
 
+// 全局加载页面
 export const FullPageLoading = () => {
   return (
     <FullPageWrapper>

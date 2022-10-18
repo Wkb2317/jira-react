@@ -12,6 +12,7 @@ import { useAsync } from '../../hooks/useAsync'
 import { Project } from './type'
 import { useProjects } from '../../hooks/useProjects'
 import { useUsers } from '../../hooks/useUsers'
+import { useDocumentTitle } from '../../hooks/useDocumentTitle'
 
 export const ProjectList = memo(() => {
   // 搜索参数
@@ -19,6 +20,8 @@ export const ProjectList = memo(() => {
     name: '',
     personId: ''
   })
+
+  useDocumentTitle('项目列表', false)
 
   const client = useHttp()
 

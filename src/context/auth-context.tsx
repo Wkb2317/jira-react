@@ -98,6 +98,7 @@ export const useAuth = () => {
   return authContext
 }
 
+// 错误信息全屏展示
 export const FullPageError = (props: { error: Error | null }) => {
   return (
     <FullPageWrapper>
