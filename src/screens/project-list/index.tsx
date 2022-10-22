@@ -13,15 +13,14 @@ import { Project } from './type'
 import { useProjects } from '../../hooks/useProjects'
 import { useUsers } from '../../hooks/useUsers'
 import { useDocumentTitle } from '../../hooks/useDocumentTitle'
+import { useUrlQueryParam } from '../../hooks/useUrlQueryParam'
 
 export const ProjectList = memo(() => {
-  // 搜索参数
-  const [param, setParam] = useState({
-    name: '',
-    personId: ''
-  })
-
   useDocumentTitle('项目列表', false)
+
+  // 搜索参数
+  const [param, setParam] = useUrlQueryParam(['name', 'personId'])
+  console.log('params:', param)
 
   const client = useHttp()
 
@@ -48,6 +47,8 @@ export const ProjectList = memo(() => {
     </Wrapper>
   )
 })
+
+ProjectList.whyDidYouRender = true
 
 const Wrapper = styled.div`
   padding: 2rem;
