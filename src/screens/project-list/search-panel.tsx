@@ -1,6 +1,8 @@
 import React, { memo } from 'react'
 import { Form, Input, Select } from 'antd'
 import type { ISearchPanel } from './type'
+import { IdSelect } from '../../components/id-select'
+import { UserSelect } from '../../components/user-select'
 
 export const SearchPanel = memo(({ param, setParam, users }: ISearchPanel) => {
   return (
@@ -18,22 +20,16 @@ export const SearchPanel = memo(({ param, setParam, users }: ISearchPanel) => {
         />
       </Form.Item>
       <Form.Item>
-        <Select
+        <UserSelect
           value={param?.personId}
           onChange={(value) =>
             setParam({
               ...param,
-              personId: value
+              personId: value || 0
             })
           }
-        >
-          <Select.Option value="">负责人</Select.Option>
-          {users.map((item) => (
-            <Select.Option value={String(item.id)} key={item.id}>
-              {item.name}
-            </Select.Option>
-          ))}
-        </Select>
+          defaultOptionName={'负责人'}
+        />
       </Form.Item>
     </Form>
   )

@@ -14,15 +14,13 @@ import { useProjects } from '../../hooks/useProjects'
 import { useUsers } from '../../hooks/useUsers'
 import { useDocumentTitle } from '../../hooks/useDocumentTitle'
 import { useUrlQueryParam } from '../../hooks/useUrlQueryParam'
+import { projectSearchParam } from './util'
 
 export const ProjectList = memo(() => {
   useDocumentTitle('项目列表', false)
 
   // 搜索参数
-  const [param, setParam] = useUrlQueryParam(['name', 'personId'])
-  console.log('params:', param)
-
-  const client = useHttp()
+  const [param, setParam] = projectSearchParam()
 
   const debounceParam = useDebounce(param, 300)
   // 人员列表

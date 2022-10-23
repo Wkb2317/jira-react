@@ -2,15 +2,12 @@ import { TableProps } from 'antd'
 
 export interface User {
   name: string
-  id: string
+  id: number
   token: string
 }
 
 export interface ISearchPanel {
-  param: {
-    name: string
-    personId: string
-  }
+  param: Pick<Project, 'name' | 'personId'>
   users: User[]
   setParam: (param: ISearchPanel['param']) => void
 }
@@ -18,7 +15,8 @@ export interface ISearchPanel {
 export interface Project {
   id: number
   name: string
-  personId: string
+  personId: number
+  pin: boolean
 }
 
 export interface IList extends TableProps<Project> {

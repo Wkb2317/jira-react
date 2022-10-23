@@ -3,13 +3,28 @@ import { Link } from 'react-router-dom'
 import { Table } from 'antd'
 import dayjs from 'dayjs'
 import type { IList } from './type'
+import Pin from '../../components/pin'
+import { useEditProject } from '../../hooks/useProjects'
 
 export const List = memo(({ users, ...props }: IList) => {
+  const { mutate } = useEditProject()
+
   return (
     <Table
       pagination={false}
       rowKey={'id'}
       columns={[
+        {
+          title: <Pin checked={true} />,
+          render(value, project) {
+            return (
+              <Pin
+                checked={project.pin}
+                onPinChange={(pin) => mutate({ id: project.id, pin })}
+              ></Pin>
+            )
+          }
+        },
         {
           title: '项目',
           render(value, row) {
