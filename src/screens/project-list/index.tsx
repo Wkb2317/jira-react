@@ -27,7 +27,8 @@ export const ProjectList = memo(() => {
   const { users } = useUsers()
   // 搜索结果
   // const [list, setList] = useState([])
-  const { isLoading, list } = useProjects(debounceParam)
+  // 获取列表数据
+  const { isLoading, list, retry } = useProjects(debounceParam)
 
   return (
     <Wrapper>
@@ -41,6 +42,7 @@ export const ProjectList = memo(() => {
         loading={isLoading}
         dataSource={list || []}
         users={users || []}
+        refresh={retry}
       ></List>
     </Wrapper>
   )

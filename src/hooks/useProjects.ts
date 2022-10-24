@@ -6,29 +6,33 @@ import { Project } from '../screens/project-list/type'
 
 export function useProjects(params: any) {
   const client = useHttp()
-  const { isLoading, run, data: list } = useAsync<Project[]>()
+  const { isLoading, run, data: list, retry } = useAsync<Project[]>()
 
   useEffect(() => {
-    run(client('projects', { data: cleanObject(params) }))
+    const fetchProjects = () =>
+      client('projects', { data: cleanObject(params) })
+    run(fetchProjects(), { retry: fetchProjects })
   }, [params])
 
   return {
     list,
-    isLoading
+    isLoading,
+    retry
   }
 }
 
+// 编辑项目
 export function useEditProject() {
   const client = useHttp()
   const { run, ...restAsyncData } = useAsync()
 
   const mutate = (params: Partial<Project>) => {
-    return run(
+    const fetchProjects = () =>
       client(`projects/${params.id}`, {
         method: 'PATCH',
         data: params
       })
-    )
+    return run(fetchProjects())
   }
 
   return {
@@ -37,6 +41,7 @@ export function useEditProject() {
   }
 }
 
+// 添加项目
 export function useAddProject() {
   const client = useHttp()
   const { run, ...restAsyncData } = useAsync()

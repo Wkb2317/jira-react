@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
+import { useMountedRef } from './useMountedRef'
 
 interface State<D> {
   data: D | null
@@ -19,47 +20,62 @@ export function useAsync<D>(initialState?: State<D>) {
     ...initialState
   })
 
-  const setSuccess = (res: any) => {
+  const setSuccess = useCallback((res: any) => {
     setState({
       data: res,
       status: 'success',
       error: null
     })
-  }
+  }, [])
 
-  const setData = (data: D) => {
+  const setData = useCallback((data: D) => {
     setState({
       ...state,
       data
     })
-  }
+  }, [])
 
-  const setError = (res: Error) => {
+  const setError = useCallback((res: Error) => {
     setState({
       data: null,
       status: 'error',
       error: res
     })
-  }
+  }, [])
 
-  const run = (promise: Promise<D>) => {
-    if (!promise || !(promise instanceof Promise)) {
-      throw new Error('请传入promise对象')
-    }
-    setState({
-      ...state,
-      status: 'loading'
-    })
-    return promise
-      .then((res) => {
-        setSuccess(res)
-        return res
+  const [retry, setRetry] = useState(() => () => {})
+  // 如果当前组件挂载了
+  const mounted = useMountedRef()
+
+  const run = useCallback(
+    (promise: Promise<D>, retryConfig?: { retry: () => Promise<D> }) => {
+      if (!promise || !(promise instanceof Promise)) {
+        throw new Error('请传入promise对象')
+      }
+      setRetry(() => () => {
+        if (retryConfig?.retry) {
+          run(retryConfig?.retry(), { retry: retryConfig?.retry })
+        }
       })
-      .catch((err) => {
-        setError(err)
-        return err
+      setState({
+        ...state,
+        status: 'loading'
       })
-  }
+
+      return promise
+        .then((res) => {
+          if (mounted.current) {
+            setSuccess(res)
+          }
+          return res
+        })
+        .catch((err) => {
+          setError(err)
+          return err
+        })
+    },
+    []
+  )
 
   return {
     isPending: state.status === 'pending',
@@ -71,6 +87,7 @@ export function useAsync<D>(initialState?: State<D>) {
     setState,
     setData,
     run,
+    retry,
     ...state
   }
 }

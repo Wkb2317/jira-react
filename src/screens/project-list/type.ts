@@ -21,4 +21,5 @@ export interface Project {
 
 export interface IList extends TableProps<Project> {
   users: User[]
+  refresh: () => void
 }
