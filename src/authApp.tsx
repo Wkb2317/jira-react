@@ -1,20 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Dropdown, Menu, Space } from 'antd'
 import { DownOutlined, SmileOutlined } from '@ant-design/icons'
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
+import styled from '@emotion/styled'
 import { useAuth } from './context/auth-context'
 import { ProjectList } from './screens/project-list'
-import styled from '@emotion/styled'
 import { Row } from './components/lib'
 import { ReactComponent as SoftwareLogo } from './assets/software-logo.svg'
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
 import { ProjectDetail } from './screens/project-detail'
 import { resetRoute } from './utils'
+import { ProjectDrawer } from './screens/project-list/project-model'
+import { ProjectPopover } from './components/project-popover'
 
 export function AuthApp() {
+  const [projectDrawerOpen, setProjectDrawerOpen] = useState(false)
+
   return (
     <Container>
-      <PageHeader></PageHeader>
+      <PageHeader setDrawerOpen={setProjectDrawerOpen}></PageHeader>
       <Main>
+        <Button onClick={() => setProjectDrawerOpen(true)}>open</Button>
         <BrowserRouter>
           <Routes>
             <Route path="/project" element={<ProjectList />}></Route>
@@ -27,11 +32,16 @@ export function AuthApp() {
           </Routes>
         </BrowserRouter>
       </Main>
+
+      <ProjectDrawer
+        open={projectDrawerOpen}
+        onClose={() => setProjectDrawerOpen(false)}
+      ></ProjectDrawer>
     </Container>
   )
 }
 
-const PageHeader = () => {
+const PageHeader = (props: { setDrawerOpen: (value: boolean) => void }) => {
   const { logout } = useAuth()
 
   const menu = (
@@ -52,8 +62,8 @@ const PageHeader = () => {
         <Button type="link" onClick={resetRoute}>
           <SoftwareLogo className="logo"></SoftwareLogo>
         </Button>
+        <ProjectPopover createProject={props.setDrawerOpen}></ProjectPopover>
 
-        <div>项目</div>
         <div>成员</div>
       </HeaderLeft>
       <HeaderRight>

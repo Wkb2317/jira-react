@@ -16,7 +16,7 @@ import { useDocumentTitle } from '../../hooks/useDocumentTitle'
 import { useUrlQueryParam } from '../../hooks/useUrlQueryParam'
 import { projectSearchParam } from './util'
 
-export const ProjectList = memo(() => {
+export const ProjectList: React.FC = memo(function () {
   useDocumentTitle('项目列表', false)
 
   // 搜索参数

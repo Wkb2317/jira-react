@@ -29,10 +29,10 @@ export function useAsync<D>(initialState?: State<D>) {
   }, [])
 
   const setData = useCallback((data: D) => {
-    setState({
-      ...state,
+    setState((preState) => ({
+      ...preState,
       data
-    })
+    }))
   }, [])
 
   const setError = useCallback((res: Error) => {
@@ -43,6 +43,7 @@ export function useAsync<D>(initialState?: State<D>) {
     })
   }, [])
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   const [retry, setRetry] = useState(() => () => {})
   // 如果当前组件挂载了
   const mounted = useMountedRef()
@@ -57,10 +58,10 @@ export function useAsync<D>(initialState?: State<D>) {
           run(retryConfig?.retry(), { retry: retryConfig?.retry })
         }
       })
-      setState({
-        ...state,
+      setState((preState) => ({
+        ...preState,
         status: 'loading'
-      })
+      }))
 
       return promise
         .then((res) => {
@@ -74,7 +75,7 @@ export function useAsync<D>(initialState?: State<D>) {
           return err
         })
     },
-    []
+    [mounted, setError, setSuccess]
   )
 
   return {

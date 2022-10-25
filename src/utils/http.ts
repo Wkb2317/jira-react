@@ -4,6 +4,7 @@ import { BASE_URL } from '../config/config'
 import * as auth from '../auth-provider'
 import { useAuth } from '../context/auth-context'
 import { message } from 'antd'
+import { useCallback } from 'react'
 
 interface Config extends RequestInit {
   token?: string
@@ -55,8 +56,11 @@ export const http = (
 
 export function useHttp() {
   const { user } = useAuth()
-  return (...[endPoint, config]: Parameters<typeof http>) =>
-    http(endPoint, { ...config, token: user?.token })
+  return useCallback(
+    (...[endPoint, config]: Parameters<typeof http>) =>
+      http(endPoint, { ...config, token: user?.token }),
+    [user?.token]
+  )
 }
 
 type Person = {

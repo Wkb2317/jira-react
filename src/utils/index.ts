@@ -10,6 +10,9 @@ export function isValidKey(
 
 // 删除参数中的空白参数
 export const cleanObject = (obj: object) => {
+  if (!obj) {
+    return
+  }
   const objCopy = { ...obj }
   Object.keys(obj).forEach((key: string) => {
     let value

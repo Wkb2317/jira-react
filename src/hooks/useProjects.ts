@@ -4,7 +4,7 @@ import { useHttp } from '../utils/http'
 import { cleanObject } from '../utils/index'
 import { Project } from '../screens/project-list/type'
 
-export function useProjects(params: any) {
+export function useProjects(params?: any) {
   const client = useHttp()
   const { isLoading, run, data: list, retry } = useAsync<Project[]>()
 
@@ -12,7 +12,7 @@ export function useProjects(params: any) {
     const fetchProjects = () =>
       client('projects', { data: cleanObject(params) })
     run(fetchProjects(), { retry: fetchProjects })
-  }, [params])
+  }, [client, params, run])
 
   return {
     list,

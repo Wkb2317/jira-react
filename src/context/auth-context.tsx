@@ -82,10 +82,9 @@ export default memo(function AuthProvider({
   }
 
   return (
-    <AuthContext.Provider
-      value={{ user, login, register, logout }}
-      children={children}
-    ></AuthContext.Provider>
+    <AuthContext.Provider value={{ user, login, register, logout }}>
+      {children}
+    </AuthContext.Provider>
   )
 })
 

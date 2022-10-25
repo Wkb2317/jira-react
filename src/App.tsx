@@ -1,3 +1,4 @@
+import React from 'react'
 import { ProjectList } from './screens/project-list/index.jsx'
 import { TsTest } from './screens/ts-test/index'
 import { UnAuthApp } from './unAuth/index'
@@ -12,8 +13,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <ProjectList></ProjectList> */}
-      {/* <TsTest></TsTest> */}
       <ErrorBoundary fallbackRender={FullPageError}>
         {user ? <AuthApp></AuthApp> : <UnAuthApp></UnAuthApp>}
       </ErrorBoundary>
