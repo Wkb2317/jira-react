@@ -15,20 +15,37 @@ import { ProjectPopover } from './components/project-popover'
 export function AuthApp() {
   const [projectDrawerOpen, setProjectDrawerOpen] = useState(false)
 
+  const CreateProjectButton = () => {
+    return (
+      <Button
+        style={{ fontSize: '18px' }}
+        type="link"
+        onClick={() => setProjectDrawerOpen(true)}
+      >
+        创建项目
+      </Button>
+    )
+  }
+
   return (
     <Container>
-      <PageHeader setDrawerOpen={setProjectDrawerOpen}></PageHeader>
+      <PageHeader projectButton={<CreateProjectButton />}></PageHeader>
       <Main>
-        <Button onClick={() => setProjectDrawerOpen(true)}>open</Button>
         <BrowserRouter>
           <Routes>
-            <Route path="/project" element={<ProjectList />}></Route>
+            <Route
+              path="/project"
+              element={<ProjectList projectButton={<CreateProjectButton />} />}
+            ></Route>
             {/* 这里加/* 成为主路由 */}
             <Route
               path="/project/:id/*"
               element={<ProjectDetail></ProjectDetail>}
             ></Route>
-            <Route index element={<ProjectList />} />
+            <Route
+              index
+              element={<ProjectList projectButton={<CreateProjectButton />} />}
+            />
           </Routes>
         </BrowserRouter>
       </Main>
@@ -41,7 +58,7 @@ export function AuthApp() {
   )
 }
 
-const PageHeader = (props: { setDrawerOpen: (value: boolean) => void }) => {
+const PageHeader = (props: { projectButton: JSX.Element }) => {
   const { logout } = useAuth()
 
   const menu = (
@@ -62,7 +79,7 @@ const PageHeader = (props: { setDrawerOpen: (value: boolean) => void }) => {
         <Button type="link" onClick={resetRoute}>
           <SoftwareLogo className="logo"></SoftwareLogo>
         </Button>
-        <ProjectPopover createProject={props.setDrawerOpen}></ProjectPopover>
+        <ProjectPopover projectButton={props.projectButton}></ProjectPopover>
 
         <div>成员</div>
       </HeaderLeft>

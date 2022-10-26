@@ -4,14 +4,13 @@ import React from 'react'
 import { useProjects } from '../hooks/useProjects'
 
 interface ProjectPopoverProps {
-  createProject: (value: boolean) => void
+  projectButton: JSX.Element
 }
 
 export const ProjectPopover: React.FC<ProjectPopoverProps> = (
   props: ProjectPopoverProps
 ) => {
   const { list } = useProjects()
-  console.log(list)
 
   const pinProjectList = list?.filter((item) => item.pin)
 
@@ -24,9 +23,7 @@ export const ProjectPopover: React.FC<ProjectPopoverProps> = (
       ></List>
 
       <Divider></Divider>
-      <Button type="link" onClick={() => props.createProject(true)}>
-        创建项目
-      </Button>
+      {props.projectButton}
     </ListContainer>
   )
 
@@ -38,7 +35,7 @@ export const ProjectPopover: React.FC<ProjectPopoverProps> = (
 }
 
 const ListContainer = styled.div`
-  width: 100px;
+  width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;

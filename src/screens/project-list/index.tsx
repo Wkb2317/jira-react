@@ -16,7 +16,13 @@ import { useDocumentTitle } from '../../hooks/useDocumentTitle'
 import { useUrlQueryParam } from '../../hooks/useUrlQueryParam'
 import { projectSearchParam } from './util'
 
-export const ProjectList: React.FC = memo(function () {
+interface ProejctListProps {
+  projectButton: JSX.Element
+}
+
+export const ProjectList: React.FC<ProejctListProps> = memo(function (
+  props: ProejctListProps
+) {
   useDocumentTitle('项目列表', false)
 
   // 搜索参数
@@ -32,7 +38,11 @@ export const ProjectList: React.FC = memo(function () {
 
   return (
     <Wrapper>
-      <h1>项目列表</h1>
+      <div className="header">
+        <h1>项目列表</h1>
+        {props.projectButton}
+      </div>
+
       <SearchPanel
         param={param}
         setParam={setParam}
@@ -52,4 +62,9 @@ ProjectList.whyDidYouRender = true
 
 const Wrapper = styled.div`
   padding: 2rem;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
 `
