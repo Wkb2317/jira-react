@@ -22,7 +22,6 @@ export const List = memo(({ users, ...props }: IList) => {
                 checked={project.pin}
                 onPinChange={(pin) =>
                   mutate({ id: project.id, pin }).then(() => {
-                    console.log(props.refresh())
                     props.refresh()
                   })
                 }

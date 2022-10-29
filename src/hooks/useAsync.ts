@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useReducer, useState } from 'react'
 import { useMountedRef } from './useMountedRef'
 
 interface State<D> {
@@ -14,32 +14,59 @@ const defaultState: State<null> = {
   error: null
 }
 
+// 可以不用type
+const reducer = (state: any, action: { type: string; payload: any }) => {
+  switch (action.type) {
+    case 'success':
+      return { ...state, ...action.payload }
+    case 'error':
+      return { ...state, ...action.payload }
+    case 'setdata':
+      return { ...state, ...action.payload }
+    case 'loading':
+      return { ...state, ...action.payload }
+    default:
+      return state
+  }
+}
+
 export function useAsync<D>(initialState?: State<D>) {
-  const [state, setState] = useState<State<D>>({
-    ...defaultState,
-    ...initialState
-  })
+  // const [state, setState] = useState<State<D>>({
+  //   ...defaultState,
+  //   ...initialState
+  // })
+
+  const [state, dispatch] = useReducer<
+    (state: State<D>, action: { type: string; payload: any }) => State<D>,
+    State<D>
+  >(
+    reducer,
+    {
+      ...defaultState,
+      ...initialState
+    },
+    (state) => state
+  )
 
   const setSuccess = useCallback((res: any) => {
-    setState({
-      data: res,
-      status: 'success',
-      error: null
+    dispatch({
+      type: 'success',
+      payload: {
+        data: res,
+        status: 'success',
+        error: null
+      }
     })
   }, [])
 
   const setData = useCallback((data: D) => {
-    setState((preState) => ({
-      ...preState,
-      data
-    }))
+    dispatch({ type: 'setdata', payload: { ...state, data } })
   }, [])
 
   const setError = useCallback((res: Error) => {
-    setState({
-      data: null,
-      status: 'error',
-      error: res
+    dispatch({
+      type: 'error',
+      payload: { data: null, status: 'error', error: res }
     })
   }, [])
 
@@ -58,10 +85,14 @@ export function useAsync<D>(initialState?: State<D>) {
           run(retryConfig?.retry(), { retry: retryConfig?.retry })
         }
       })
-      setState((preState) => ({
-        ...preState,
-        status: 'loading'
-      }))
+
+      dispatch({
+        type: 'loading',
+        payload: {
+          ...state,
+          status: 'loading'
+        }
+      })
 
       return promise
         .then((res) => {
@@ -85,7 +116,7 @@ export function useAsync<D>(initialState?: State<D>) {
     isError: state.status === 'error',
     setError,
     setSuccess,
-    setState,
+    dispatch,
     setData,
     run,
     retry,
