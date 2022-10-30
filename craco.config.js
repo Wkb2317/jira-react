@@ -1,6 +1,9 @@
 const CracoLessPlugin = require('craco-less')
 
 module.exports = {
+  webpack: {
+    extensions: ['.ts', '.tsx', '.js', '.json']
+  },
   plugins: [
     {
       plugin: CracoLessPlugin,

@@ -14,19 +14,18 @@ import { useProjects } from '../../hooks/useProjects'
 import { useUsers } from '../../hooks/useUsers'
 import { useDocumentTitle } from '../../hooks/useDocumentTitle'
 import { useUrlQueryParam } from '../../hooks/useUrlQueryParam'
-import { projectSearchParam } from './util'
+import { useProjectSearchParam } from './util'
+import { Button } from 'antd'
+import { useAppDispatch } from '../../store'
+import { openProjectModel } from './project-slice'
 
-interface ProejctListProps {
-  projectButton: JSX.Element
-}
-
-export const ProjectList: React.FC<ProejctListProps> = memo(function (
-  props: ProejctListProps
-) {
+export const ProjectList: React.FC<any> = memo(function () {
   useDocumentTitle('项目列表', false)
 
+  const dispatch = useAppDispatch()
+
   // 搜索参数
-  const [param, setParam] = projectSearchParam()
+  const [param, setParam] = useProjectSearchParam()
 
   const debounceParam = useDebounce(param, 300)
   // 人员列表
@@ -40,7 +39,13 @@ export const ProjectList: React.FC<ProejctListProps> = memo(function (
     <Wrapper>
       <div className="header">
         <h1>项目列表</h1>
-        {props.projectButton}
+        <Button
+          style={{ fontSize: '18px' }}
+          type="link"
+          onClick={() => dispatch(openProjectModel())}
+        >
+          创建项目
+        </Button>
       </div>
 
       <SearchPanel

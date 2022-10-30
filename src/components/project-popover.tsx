@@ -2,15 +2,12 @@ import styled from '@emotion/styled'
 import { Button, Divider, List, Popover, Typography } from 'antd'
 import React from 'react'
 import { useProjects } from '../hooks/useProjects'
+import { useAppDispatch } from '../store'
+import { openProjectModel } from '../screens/project-list/project-slice'
 
-interface ProjectPopoverProps {
-  projectButton: JSX.Element
-}
-
-export const ProjectPopover: React.FC<ProjectPopoverProps> = (
-  props: ProjectPopoverProps
-) => {
+export const ProjectPopover: React.FC<any> = () => {
   const { list } = useProjects()
+  const dispatch = useAppDispatch()
 
   const pinProjectList = list?.filter((item) => item.pin)
 
@@ -23,7 +20,13 @@ export const ProjectPopover: React.FC<ProjectPopoverProps> = (
       ></List>
 
       <Divider></Divider>
-      {props.projectButton}
+      <Button
+        style={{ fontSize: '18px' }}
+        type="link"
+        onClick={() => dispatch(openProjectModel())}
+      >
+        创建项目
+      </Button>
     </ListContainer>
   )
 

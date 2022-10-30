@@ -6,16 +6,22 @@ import { loadServer, DevTools } from 'jira-dev-tool'
 import App from './App'
 import AppProvider from './context/index'
 
+//  redux
+import { Provider } from 'react-redux'
+import { store } from './store'
+
 import reportWebVitals from './reportWebVitals'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 loadServer(() =>
   root.render(
-    <AppProvider>
-      <DevTools />
-      <App />
-    </AppProvider>
+    <Provider store={store}>
+      <AppProvider>
+        <DevTools />
+        <App />
+      </AppProvider>
+    </Provider>
   )
 )
 

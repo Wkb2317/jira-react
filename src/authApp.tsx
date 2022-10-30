@@ -29,14 +29,11 @@ export function AuthApp() {
 
   return (
     <Container>
-      <PageHeader projectButton={<CreateProjectButton />}></PageHeader>
+      <PageHeader></PageHeader>
       <Main>
         <BrowserRouter>
           <Routes>
-            <Route
-              path="/project"
-              element={<ProjectList projectButton={<CreateProjectButton />} />}
-            ></Route>
+            <Route path="/project" element={<ProjectList />}></Route>
             {/* 这里加/* 成为主路由 */}
             <Route
               path="/project/:id/*"
@@ -58,7 +55,7 @@ export function AuthApp() {
   )
 }
 
-const PageHeader = (props: { projectButton: JSX.Element }) => {
+const PageHeader = () => {
   const { logout } = useAuth()
 
   const menu = (
@@ -79,7 +76,7 @@ const PageHeader = (props: { projectButton: JSX.Element }) => {
         <Button type="link" onClick={resetRoute}>
           <SoftwareLogo className="logo"></SoftwareLogo>
         </Button>
-        <ProjectPopover projectButton={props.projectButton}></ProjectPopover>
+        <ProjectPopover></ProjectPopover>
 
         <div>成员</div>
       </HeaderLeft>
