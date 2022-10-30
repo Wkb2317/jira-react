@@ -11,16 +11,24 @@ import { ProjectDetail } from './screens/project-detail'
 import { resetRoute } from './utils'
 import { ProjectDrawer } from './screens/project-list/project-model'
 import { ProjectPopover } from './components/project-popover'
+import { useAppDispatch, useAppSelector } from './store'
+import {
+  openProjectModel,
+  closeProjectModel
+} from './screens/project-list/project-slice'
 
 export function AuthApp() {
-  const [projectDrawerOpen, setProjectDrawerOpen] = useState(false)
+  const dispatch = useAppDispatch()
+  const projectDrawerOpen = useAppSelector(
+    (state) => state.projectSlice.projectModelStatus
+  )
 
   const CreateProjectButton = () => {
     return (
       <Button
         style={{ fontSize: '18px' }}
         type="link"
-        onClick={() => setProjectDrawerOpen(true)}
+        onClick={() => dispatch(openProjectModel())}
       >
         创建项目
       </Button>
@@ -39,17 +47,14 @@ export function AuthApp() {
               path="/project/:id/*"
               element={<ProjectDetail></ProjectDetail>}
             ></Route>
-            <Route
-              index
-              element={<ProjectList projectButton={<CreateProjectButton />} />}
-            />
+            <Route index element={<ProjectList />} />
           </Routes>
         </BrowserRouter>
       </Main>
 
       <ProjectDrawer
         open={projectDrawerOpen}
-        onClose={() => setProjectDrawerOpen(false)}
+        onClose={() => dispatch(closeProjectModel())}
       ></ProjectDrawer>
     </Container>
   )

@@ -60,7 +60,9 @@ export function useAsync<D>(initialState?: State<D>) {
   }, [])
 
   const setData = useCallback((data: D) => {
-    dispatch({ type: 'setdata', payload: { ...state, data } })
+    console.log('data', data)
+
+    dispatch({ type: 'setdata', payload: { data } })
   }, [])
 
   const setError = useCallback((res: Error) => {
@@ -89,7 +91,6 @@ export function useAsync<D>(initialState?: State<D>) {
       dispatch({
         type: 'loading',
         payload: {
-          ...state,
           status: 'loading'
         }
       })
