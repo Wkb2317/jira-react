@@ -3,6 +3,7 @@ import { Form, Input, Button } from 'antd'
 import { useAuth } from '../context/auth-context'
 import { useAsync } from '../hooks/useAsync'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
+import { useDispatch } from 'react-redux'
 
 export const Login = memo(() => {
   const { user, login } = useAuth()
@@ -10,7 +11,9 @@ export const Login = memo(() => {
 
   useDocumentTitle('登录或注册', false)
 
-  const submit = (values: { username: string; password: string }) => {
+  const dispatch = useDispatch()
+
+  const submit = async (values: { username: string; password: string }) => {
     run(login(values))
   }
 

@@ -2,13 +2,16 @@ import React, { FormEvent, memo, useState } from 'react'
 import { Form, Input, Button, message } from 'antd'
 import { useAuth } from '../context/auth-context'
 import { useAsync } from '../hooks/useAsync'
+import { useDispatch } from 'react-redux'
 
 export const Register = memo(() => {
   const { user, register } = useAuth()
 
   const { run, isLoading } = useAsync()
 
-  const submit = (values: {
+  const dispatch = useDispatch()
+
+  const submit = async (values: {
     username: string
     password: string
     confirmPassword: string

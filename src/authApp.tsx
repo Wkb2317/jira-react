@@ -62,13 +62,18 @@ export function AuthApp() {
 
 const PageHeader = () => {
   const { logout } = useAuth()
+  const dispatch = useAppDispatch()
+
+  const btnClick = () => {
+    logout()
+  }
 
   const menu = (
     <Menu
       items={[
         {
           key: '2',
-          label: <span onClick={() => logout()}>登出</span>,
+          label: <span onClick={btnClick}>登出</span>,
           icon: <SmileOutlined />
         }
       ]}

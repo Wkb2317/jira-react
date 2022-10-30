@@ -1,10 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, applyMiddleware } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
 import type { TypedUseSelectorHook } from 'react-redux'
 import projectSlice from '../screens/project-list/project-slice'
+import { userReducer } from './auth'
 
 export const rootReducer = {
-  projectSlice
+  projectSlice,
+  userReducer
 }
 
 export const store = configureStore({

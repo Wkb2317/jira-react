@@ -7,14 +7,22 @@ import React, {
   useCallback,
   ReactPropTypes
 } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import * as auth from '../auth-provider'
 import { FullPageLoading, FullPageWrapper } from '../components/lib'
 import { useAsync } from '../hooks/useAsync'
 import { useMount } from '../hooks/useMount'
 import { User } from '../screens/project-list/type'
+import { useAppDispatch, useAppSelector } from '../store'
+import {
+  loginThunk,
+  registerThunk,
+  logoutThunk,
+  bootstrapUserThunk
+} from '../store/auth'
 import { http } from '../utils/http'
 
-interface AuthForm {
+export interface AuthForm {
   username: string
   password: string
 }
@@ -29,6 +37,17 @@ const AuthContext = React.createContext<
   | undefined
 >(undefined)
 AuthContext.displayName = 'AuthContext'
+
+// 初始化user
+const bootstrapUser = async () => {
+  let user = null
+  const token = auth.getToken()
+  if (token) {
+    const data = await http('me', { token })
+    user = data.user
+  }
+  return user
+}
 
 // provider组件
 export default memo(function AuthProvider({
@@ -47,19 +66,10 @@ export default memo(function AuthProvider({
     setData: setUser
   } = useAsync<User | null>()
 
-  // 初始化user
-  const bootstrapUser = async () => {
-    let user = null
-    const token = auth.getToken()
-    if (token) {
-      const data = await http('me', { token })
-      user = data.user
-    }
-    return user
-  }
+  const dispatch: (...args: unknown[]) => Promise<User> = useAppDispatch()
 
   useMount(() => {
-    run(bootstrapUser())
+    run(dispatch(bootstrapUserThunk()))
     // bootstrapUser().then((user) => setUser(user))
   })
 
@@ -81,20 +91,32 @@ export default memo(function AuthProvider({
     return <FullPageError error={error}></FullPageError>
   }
 
-  return (
-    <AuthContext.Provider value={{ user, login, register, logout }}>
-      {children}
-    </AuthContext.Provider>
-  )
+  return <div>{children}</div>
 })
 
 // 自定义hook
 export const useAuth = () => {
-  const authContext = React.useContext(AuthContext)
-  if (!authContext) {
-    throw new Error('useAuth必须在AuthProvider中使用')
+  // const authContext = React.useContext(AuthContext)
+  // if (!authContext) {
+  //   throw new Error('useAuth必须在AuthProvider中使用')
+  // }
+
+  // --------------  使用redux改写context  -------------
+  // 获取用户信息
+  const user = useAppSelector((state) => state.userReducer.user)
+
+  const dispatch: (...args: unknown[]) => Promise<User> = useAppDispatch()
+
+  const login = (form: AuthForm) => dispatch(loginThunk(form))
+  const register = (form: AuthForm) => dispatch(registerThunk(form))
+  const logout = () => dispatch(logoutThunk())
+
+  return {
+    login,
+    register,
+    logout,
+    user
   }
-  return authContext
 }
 
 // 错误信息全屏展示
@@ -106,3 +128,5 @@ export const FullPageError = (props: { error: Error | null }) => {
     </FullPageWrapper>
   )
 }
+
+export { bootstrapUser }
